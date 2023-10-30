@@ -109,7 +109,7 @@ def i_func():
     y = df_i.charges
 
     #train test split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state = 42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state = 42)
     #print("X_train shape: ", X_train.shape)
     #print("X_test shape: ", X_test.shape)
     #print("y_train shpae: ", y_train.shape)
@@ -117,14 +117,20 @@ def i_func():
 
     l_reg = LinearRegression()
     l_reg2 = l_reg.fit(X_train,y_train)
-    pred = l_reg2.predict(X_test)
+    y_pred = l_reg2.predict(X_test)
+    
+    #slope, y intercept
+    c = l_reg2.intercept_
+    m = l_reg2.coef_
+    print("Intercept: ",c)
+    print("Slope= ", m)
     #y_train_pred = l_reg.predict(X_train)
     #y_test_pred = l_reg.predict(X_test)
 
     #r2 score shows the accuracy of prediction(x_test) to y_test data
-    print("r2 score:", r2_score(y_test, pred))
+    print("r2 score:", r2_score(y_test, y_pred))
 
-    plt.scatter(y_test, pred)
+    plt.scatter(y_test, y_pred)
     plt.xlabel('Y test')
     plt.ylabel('Y pred')
     plt.show()
