@@ -91,9 +91,6 @@ def i_func():
     print("____to numerical test data_____")
     print(df_i_test)
 
-
-
-
     # catplot smoker vs charges + male/female
     sns.catplot(x="smoker", y="charges",col_wrap=3, col="sex",data= df_i, kind="box",height=5, aspect=0.8)
     #plt.show()
@@ -118,6 +115,14 @@ def i_func():
     l_reg = LinearRegression()
     l_reg2 = l_reg.fit(X_train,y_train)
     y_pred = l_reg2.predict(X_test)
+
+    #line plot y test to y actual
+    df_a = pd.DataFrame({'Actual':y_test,'Lr':y_pred})
+    plt.plot(df_a['Actual'].iloc[0:11],label='Actual')
+    plt.plot(df_a['Lr'].iloc[0:11],label='Lr')
+    plt.tight_layout()
+    plt.legend()
+    plt.show()
     
     #slope, y intercept
     c = l_reg2.intercept_
@@ -131,8 +136,13 @@ def i_func():
     print("r2 score:", r2_score(y_test, y_pred))
 
     plt.scatter(y_test, y_pred)
+    #plt.plot(y_test, y_pred)
     plt.xlabel('Y test')
     plt.ylabel('Y pred')
+    plt.show()
+
+
+    sns.lmplot(x='bmi',y='charges',hue='smoker',data=df_i,aspect=1.5,height=5)
     plt.show()
     
     # drop sex column from test data
@@ -146,6 +156,7 @@ def i_func():
         print("Cost prediction for customer 1:", cost_predict)
 
     cost_predict_all = l_reg.predict(df_i_test2[:10])
+
     
     for i in range(0, len(cost_predict_all)):
         print("customer: ", i+1, " Predicted Charges: $", cost_predict_all[i])
@@ -166,6 +177,7 @@ i_func()
 
 
 
+# https://www.kaggle.com/code/kaggleashwin/linear-regression-on-insurance-dataset
 
 # https://python.plainenglish.io/data-exploration-with-pandas-and-matplolib-69c24cb5ecee
 
