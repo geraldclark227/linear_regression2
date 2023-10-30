@@ -64,14 +64,11 @@ def i_func():
     #plt.show()
 
     #charges vs smokers, mean
-
-
     df_i.groupby(['smoker'])['charges'].agg(['mean']).plot.bar()
     plt.ylabel('charges')
     plt.xlabel('smoker')
     plt.title('Average Charges')
     plt.show()
-
 
     # change train data to numerical data
     df_i['sex'] = df_i['sex'].apply({'male':0, 'female':1}.get)
@@ -159,7 +156,7 @@ def i_func():
 
     
     for i in range(0, len(cost_predict_all)):
-        print("customer: ", i+1, " Predicted Charges: $", cost_predict_all[i])
+        print("Customer: ", i+1, " Predicted Charges: $", cost_predict_all[i])
 
     # Steps 6-10 show the accuracy of the model that is fitted using the test data against the train data. 
     # The model created then can be used to predict charges for customers of can be used to predict 
